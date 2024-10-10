@@ -1,6 +1,6 @@
 import { Spinner, SpinnerTypes } from "./spinner-types.ts";
 import { writeLine, colorise, Color, clearLine, showCursor, hideCursor, } from "./util.ts";
-import * as Colors from "https://deno.land/std@0.52.0/fmt/colors.ts";
+import * as Colors from "jsr:@std/fmt/colors";
 
 export interface Options {
 	text: string;
