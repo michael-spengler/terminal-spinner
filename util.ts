@@ -1,4 +1,5 @@
-import * as Colors from "https://deno.land/std@0.52.0/fmt/colors.ts";
+import { writeAllSync } from "jsr:@std/io/write-all";
+import * as Colors from "jsr:@std/fmt/colors";
 
 // Terminal escape sequences
 const ESC = "\x1b[";
@@ -36,7 +37,7 @@ export function writeLine(
 	text: string,
 	indent?: number
 ) {
-	Deno.writeAllSync(
+	writeAllSync(
 		writer,
 		encoder.encode(`\r${indent ? ESC + indent + "C" : ""}${text}`)
 	);
@@ -47,7 +48,7 @@ export function writeLine(
  * @param encoder A TextEncoder object
  */
 export function clearLine(writer: Deno.WriterSync, encoder: TextEncoder) {
-	Deno.writeAllSync(writer, encoder.encode(ESC + "2K\r"));
+	writeAllSync(writer, encoder.encode(ESC + "2K\r"));
 }
 
 /**
@@ -55,7 +56,7 @@ export function clearLine(writer: Deno.WriterSync, encoder: TextEncoder) {
  * @param encoder A TextEncoder object
  */
 export function hideCursor(writer: Deno.WriterSync, encoder: TextEncoder) {
-	Deno.writeAllSync(writer, encoder.encode(ESC + "?25l"));
+	writeAllSync(writer, encoder.encode(ESC + "?25l"));
 }
 
 /**
@@ -63,5 +64,5 @@ export function hideCursor(writer: Deno.WriterSync, encoder: TextEncoder) {
  * @param encoder A TextEncoder object
  */
 export function showCursor(writer: Deno.WriterSync, encoder: TextEncoder) {
-	Deno.writeAllSync(writer, encoder.encode(ESC + "?25h"));
+	writeAllSync(writer, encoder.encode(ESC + "?25h"));
 }
